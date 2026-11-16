@@ -1,0 +1,24 @@
+{
+  "cases": 15,
+  "audio_cases": 13,
+  "matched_all": 1600,
+  "mean_before": 1.0775431291131676,
+  "mean_after": 0.3975039327910191,
+  "matched_audio": 1512,
+  "audio_before": 1.0879302479869197,
+  "audio_after": 0.4001412988463852,
+  "case18_choice": "first",
+  "removed": [
+    "case15_A7",
+    "case16_A7"
+  ],
+  "changed": [
+    "case07_A4",
+    "case13_A7",
+    "case14_A7",
+    "case17_A8_2",
+    "case18_A8_1",
+    "case20_A1"
+  ],
+  "status": "PASS"
+}

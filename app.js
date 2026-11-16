@@ -217,7 +217,7 @@
   });
   $('expandBackdrop').addEventListener('click',closeExpanded);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&expanded){e.preventDefault();closeExpanded()}});
-  function seconds(x){return x==null?'未完成':x>=60?`${Math.floor(x/60)} 分 ${(x%60).toFixed(1)} 秒`:`${x.toFixed(2)} 秒`}
+  function seconds(x){return x==null?'未单独计时':x>=60?`${Math.floor(x/60)} 分 ${(x%60).toFixed(1)} 秒`:`${x.toFixed(2)} 秒`}
   for(const c of cases){const o=document.createElement('option');o.value=c.id;o.textContent=`${c.id} · ${visibleDuration(c).toFixed(1)} 秒`; $('case').appendChild(o);
     const tr=document.createElement('tr'),a=window.FRAME_CAL[c.id];
     const phys=a.physics_status==='RUNNING'?'进行中':a.physics_status==='FAIL'?'失败，显示拟合前':a.physics_converged?'收敛':'未收敛，显示拟合前';

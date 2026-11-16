@@ -1,6 +1,6 @@
 {
   "protocol": "Only B/C images and the B/C trajectory were used. Excluded samples are missing, not interpolated. No A prediction was used.",
-  "count": 9,
+  "count": 8,
   "edits": [
     {
       "case": "case04_A7_1",
@@ -35,7 +35,7 @@
     {
       "case": "case13_A7",
       "ref_index": 258,
-      "time_B_s": 2.725911008838136,
+      "time_B_s": 1.6259110088381359,
       "original_xyz_m": [
         -0.5192591412522393,
         1.9976486481251305,
@@ -50,7 +50,7 @@
     {
       "case": "case13_A7",
       "ref_index": 488,
-      "time_B_s": 5.128148652149161,
+      "time_B_s": 4.028148652149161,
       "original_xyz_m": [
         -3.2522477933139036,
         -2.160594651803661,
@@ -65,7 +65,7 @@
     {
       "case": "case13_A7",
       "ref_index": 509,
-      "time_B_s": 5.32599870900982,
+      "time_B_s": 4.22599870900982,
       "original_xyz_m": [
         -1.9759279325841974,
         1.4283328142249496,
@@ -76,21 +76,6 @@
       "decision": "exclude",
       "reason": "B/C picture and neighboring B/C trajectory show isolated mismatch",
       "review_image_sha256": "22e39efe6506fd00a9a8fc9688c1b44be295184415b50372e45463b24166af77"
-    },
-    {
-      "case": "case16_A7",
-      "ref_index": 41,
-      "time_B_s": 0.5056800077987305,
-      "original_xyz_m": [
-        -1.0300771951040244,
-        0.12701026168628038,
-        3.5486214561653218
-      ],
-      "B_frame": 425,
-      "C_frame": 507,
-      "decision": "exclude",
-      "reason": "B/C picture and neighboring B/C trajectory show isolated mismatch",
-      "review_image_sha256": "612d52d30ea1b7e3d2069fa82725814dc52c08533183258be21abc166a66c619"
     },
     {
       "case": "case17_A8_1",
@@ -137,5 +122,6 @@
       "reason": "B/C picture and neighboring B/C trajectory show isolated mismatch",
       "review_image_sha256": "8dc10fa2000948284914f65f5072cdd41972134b4475999dc303ff5ad298830e"
     }
-  ]
+  ],
+  "note": "Previously reviewed B/C exclusions, retained only for current displayed clips. No new B/C edits."
 }

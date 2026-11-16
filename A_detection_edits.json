@@ -1,0 +1,235 @@
+{
+  "independence": "A input review used A video only",
+  "cases": [
+    {
+      "case": "case07_A4",
+      "cut_start_s": 0.0,
+      "source_start_frame": 0,
+      "frames_before": 179,
+      "frames_after": 179,
+      "masked_A_observations": [
+        {
+          "source_frame": 128,
+          "source_time_s": 4.266666666666667,
+          "old_x": 318.28045654296875,
+          "old_y": 17.937854766845703,
+          "old_reason": "measured_shuttle_streak"
+        },
+        {
+          "source_frame": 129,
+          "source_time_s": 4.3,
+          "old_x": 317.0128173828125,
+          "old_y": 20.319067001342773,
+          "old_reason": "measured_shuttle_streak"
+        },
+        {
+          "source_frame": 130,
+          "source_time_s": 4.333333333333333,
+          "old_x": 317.80999755859375,
+          "old_y": 23.440000534057617,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 131,
+          "source_time_s": 4.366666666666666,
+          "old_x": 317.6195983886719,
+          "old_y": 22.352529525756836,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 132,
+          "source_time_s": 4.4,
+          "old_x": 318.75,
+          "old_y": 24.37999725341797,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 133,
+          "source_time_s": 4.433333333333334,
+          "old_x": 317.7721252441406,
+          "old_y": 23.105327606201172,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 134,
+          "source_time_s": 4.466666666666667,
+          "old_x": 319.69000244140625,
+          "old_y": 25.309999465942383,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 135,
+          "source_time_s": 4.5,
+          "old_x": 318.75,
+          "old_y": 25.309999465942383,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 136,
+          "source_time_s": 4.533333333333333,
+          "old_x": 318.2891540527344,
+          "old_y": 24.183719635009766,
+          "old_reason": "current_frame_pixel_peak"
+        },
+        {
+          "source_frame": 137,
+          "source_time_s": 4.566666666666666,
+          "old_x": 319.00634765625,
+          "old_y": 23.837039947509766,
+          "old_reason": "reverse_pass_peak"
+        }
+      ],
+      "A_only_review": true,
+      "BC_used_to_select_edits": false
+    },
+    {
+      "case": "case13_A7",
+      "cut_start_s": 1.1,
+      "source_start_frame": 33,
+      "frames_before": 201,
+      "frames_after": 168,
+      "masked_A_observations": [],
+      "A_only_review": true,
+      "BC_used_to_select_edits": false
+    },
+    {
+      "case": "case14_A7",
+      "cut_start_s": 1.0,
+      "source_start_frame": 30,
+      "frames_before": 177,
+      "frames_after": 147,
+      "masked_A_observations": [],
+      "A_only_review": true,
+      "BC_used_to_select_edits": false
+    },
+    {
+      "case": "case17_A8_2",
+      "cut_start_s": 0.0,
+      "source_start_frame": 0,
+      "frames_before": 109,
+      "frames_after": 109,
+      "masked_A_observations": [
+        {
+          "source_frame": 62,
+          "source_time_s": 2.066666666666667,
+          "old_x": 248.53395080566406,
+          "old_y": 9.724315643310547,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 63,
+          "source_time_s": 2.1,
+          "old_x": 244.6047821044922,
+          "old_y": 6.652406692504883,
+          "old_reason": "measured_shuttle_streak"
+        },
+        {
+          "source_frame": 64,
+          "source_time_s": 2.1333333333333333,
+          "old_x": 241.76934814453125,
+          "old_y": 5.267024517059326,
+          "old_reason": "measured_shuttle_streak"
+        },
+        {
+          "source_frame": 65,
+          "source_time_s": 2.1666666666666665,
+          "old_x": 238.712646484375,
+          "old_y": 3.6753783226013184,
+          "old_reason": "current_frame_pixel_peak"
+        },
+        {
+          "source_frame": 66,
+          "source_time_s": 2.2,
+          "old_x": 234.74362182617188,
+          "old_y": 2.771885395050049,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 67,
+          "source_time_s": 2.2333333333333334,
+          "old_x": 233.44000244140625,
+          "old_y": 3.75,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 68,
+          "source_time_s": 2.2666666666666666,
+          "old_x": 230.54779052734375,
+          "old_y": 2.3813114166259766,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 69,
+          "source_time_s": 2.3,
+          "old_x": 229.69000244140625,
+          "old_y": 3.75,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 70,
+          "source_time_s": 2.3333333333333335,
+          "old_x": 227.52552795410156,
+          "old_y": 2.570157289505005,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 71,
+          "source_time_s": 2.3666666666666667,
+          "old_x": 226.8800048828125,
+          "old_y": 3.75,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 72,
+          "source_time_s": 2.4,
+          "old_x": 225.93997192382812,
+          "old_y": 3.75,
+          "old_reason": "reverse_pass_peak"
+        },
+        {
+          "source_frame": 73,
+          "source_time_s": 2.433333333333333,
+          "old_x": 224.24356079101562,
+          "old_y": 4.712488174438477,
+          "old_reason": "current_frame_pixel_peak"
+        },
+        {
+          "source_frame": 74,
+          "source_time_s": 2.466666666666667,
+          "old_x": 223.38986206054688,
+          "old_y": 3.627880573272705,
+          "old_reason": "voted_peak"
+        },
+        {
+          "source_frame": 75,
+          "source_time_s": 2.5,
+          "old_x": 222.85910034179688,
+          "old_y": 6.463757514953613,
+          "old_reason": "measured_shuttle_streak"
+        }
+      ],
+      "A_only_review": true,
+      "BC_used_to_select_edits": false
+    },
+    {
+      "case": "case18_A8_1",
+      "cut_start_s": 1.0,
+      "source_start_frame": 30,
+      "frames_before": 202,
+      "frames_after": 172,
+      "masked_A_observations": [],
+      "A_only_review": true,
+      "BC_used_to_select_edits": false
+    },
+    {
+      "case": "case20_A1",
+      "cut_start_s": 0.5,
+      "source_start_frame": 15,
+      "frames_before": 144,
+      "frames_after": 129,
+      "masked_A_observations": [],
+      "A_only_review": true,
+      "BC_used_to_select_edits": false
+    }
+  ]
+}
