@@ -55,7 +55,7 @@
     const states={PASS:a.physics_converged?'数值收敛 · 显示拟合后':'未收敛 · 显示拟合前',FAIL:'拟合失败 · 显示拟合前',RUNNING:'拟合中 · 显示拟合前'};
     $('fitStatus').textContent=mode==='redetect'?(states[a.physics_status]||a.physics_status):(paired()?.stage==='full'?'物理拟合后':'拟合前网络结果');
     $('dynamicStatus').textContent=mode==='redetect'?`A 机使用逐帧场线与相机参数：${a.valid.slice(Math.round(visibleStart(data)*a.fps)).filter(Boolean).length} / ${a.frames-Math.round(visibleStart(data)*a.fps)} 帧达到自动图像支持条件；红色十字由本帧识别的白线拟合。相机参数也已输入重建与物理拟合。${a.temporal_prior_frames?.length?` ${a.temporal_prior_frames.length} 帧受到遮挡，结合相邻帧约束后重新识别。`:''}`:'当前显示其他相机模式。';
-    let distances=[];for(const f of data.frames){if(f.t<visibleStart(data))continue;const s=nearest(data.stereo,f.t+data.player_shifts.B,'t_B_s'),m=mono(f);if(s&&m&&s.xyz_m&&Math.abs(s.t_B_s-(f.t+data.player_shifts.B))<.025&&m.every(Number.isFinite)&&s.xyz_m.every(Number.isFinite))distances.push(Math.hypot(...m.map((x,i)=>x-s.xyz_m[i])))}
+    let distances=[];for(const f of data.frames){if(f.t<visibleStart(data))continue;const s=nearest(data.stereo,f.t+data.player_shifts.B,'t_B_s'),m=mono(f);if(s&&m&&s.xyz_m&&Math.abs(s.t_B_s-(f.t+data.player_shifts.B))<=.010&&m.every(Number.isFinite)&&s.xyz_m.every(Number.isFinite))distances.push(Math.hypot(...m.map((x,i)=>x-s.xyz_m[i])))}
     $('difference').textContent=distances.length?`${(distances.reduce((x,y)=>x+y,0)/distances.length).toFixed(2)} 米 · ${distances.length} 帧`:'暂无时间配对';
   }
   function ring(ctx,p,color,sourceWidth,k){if(!p||!p.every(Number.isFinite))return;const radius=Math.max(5,sourceWidth/110),line=Math.max(2,sourceWidth/320);
@@ -98,10 +98,10 @@
     for(const f of data.frames){if(f.t<visibleStart(data))continue;if(f.t>maxt)break;const xyz=mono(f);if(!xyz||!xyz.every(Number.isFinite)){started=false;continue}const q=xy(xyz);if(started)ctx.lineTo(...q);else{ctx.moveTo(...q);started=true}}ctx.stroke();
     ctx.strokeStyle='#d9801f';ctx.lineWidth=3;ctx.setLineDash([9,7]);ctx.beginPath();let prev=null;
     for(const s of data.stereo){if(s.t_B_s-data.player_shifts.B<visibleStart(data))continue;if(s.t_B_s-data.player_shifts.B>maxt)break;if(!s.xyz_m||!s.xyz_m.every(Number.isFinite)){prev=null;continue}
-      const q=xy(s.xyz_m);if(prev!==null&&s.t_B_s-prev<=.10)ctx.lineTo(...q);else ctx.moveTo(...q);prev=s.t_B_s}
+      const q=xy(s.xyz_m);if(prev!==null&&s.t_B_s-prev<=.10&&!s.break_before)ctx.lineTo(...q);else ctx.moveTo(...q);prev=s.t_B_s}
     ctx.stroke();ctx.setLineDash([]);
     const f=nearest(data.frames,t);if(f&&mono(f)&&Math.abs(f.t-t)<.05){const q=xy(mono(f));ctx.fillStyle='#236fc3';ctx.beginPath();ctx.arc(q[0],q[1],7,0,2*Math.PI);ctx.fill()}
-    const ref=nearest(data.stereo,t+data.player_shifts.B,'t_B_s');if(ref&&Math.abs(ref.t_B_s-(t+data.player_shifts.B))<.025){const q=xy(ref.xyz_m);ctx.fillStyle='#d9801f';ctx.beginPath();ctx.arc(q[0],q[1],7,0,2*Math.PI);ctx.fill()}
+    const ref=nearest(data.stereo,t+data.player_shifts.B,'t_B_s');if(ref&&Math.abs(ref.t_B_s-(t+data.player_shifts.B))<=.010){const q=xy(ref.xyz_m);ctx.fillStyle='#d9801f';ctx.beginPath();ctx.arc(q[0],q[1],7,0,2*Math.PI);ctx.fill()}
     ctx.fillStyle='#698379';ctx.font='17px sans-serif';ctx.fillText('球场坐标（米）',24,h-18);
   }
   const fitName = {
@@ -147,13 +147,16 @@
       v.addEventListener('seeked',finish);timer=setTimeout(finish,2000);seekVideo(k,t);if(!v.seeking)finish();
     });
   }
-  async function resumeAligned(t){const token=++playbackEpoch;resyncing=true;
+  async function resumeAligned(t){
+    const token=++playbackEpoch;resyncing=true;const active='ABC'.split('').filter(shouldRun);
     for(const v of Object.values(videos))v.pause();$('play').disabled=true;$('play').textContent='同步中…';
-    await Promise.all('ABC'.split('').map(k=>waitForSeek(k,t)));
-    if(token!==playbackEpoch)return;
-    try{await Promise.all(Object.values(videos).map(v=>v.play()));if(token===playbackEpoch)$('play').textContent='暂停'}
-    catch(e){if(token===playbackEpoch)pause()}
-    if(token===playbackEpoch){resyncing=false;$('play').disabled=false}
+    try{
+      await Promise.all(active.map(k=>waitForSeek(k,t)));if(token!==playbackEpoch)return;
+      for(const k of active)videos[k].playbackRate=Number($('rate').value);
+      await Promise.all(active.map(k=>videos[k].play()));if(token!==playbackEpoch)return;
+      $('play').textContent='暂停';
+    }catch(e){if(token===playbackEpoch){pause();$('caseNote').textContent+=' 播放未能开始，请重试。'}}
+    finally{if(token===playbackEpoch){resyncing=false;$('play').disabled=false}}
   }
   function waitUntilReady(k,t,version){const v=videos[k];
     return new Promise(resolve=>{let done=false,timer;const names=['loadedmetadata','loadeddata','canplay','seeked','error'];
@@ -176,9 +179,10 @@
     if(ready.some(x=>!x))$('caseNote').textContent+=' 有画面加载较慢，请稍候或重试。';refresh(t);
   }
   $('play').onclick=async()=>{
-    if(!videos[masterKey()].paused){pause();return}if(masterTime()>=data.duration_s-.03)setTime(visibleStart(data));
-    const token=++playbackEpoch,t=masterTime();for(const k of 'ABC'){videos[k].playbackRate=Number($('rate').value);if(shouldRun(k))seekVideo(k,t);else videos[k].pause()}
-    try{$('play').textContent='暂停';await Promise.all('ABC'.split('').filter(shouldRun).map(k=>videos[k].play()));}catch(e){if(token===playbackEpoch){pause();$('caseNote').textContent+=' 播放未能开始，请使用本机浏览器打开报告。'}}
+    if(loading||resyncing)return;const v=videos[masterKey()];
+    if(!v.paused){pause();return}
+    let t=masterTime();if(v.ended||t>=data.duration_s-.04)t=visibleStart(data);
+    await resumeAligned(t);
   };
   $('back').onclick=()=>{const t=masterTime();pause();setTime(t-1/30)};$('next').onclick=()=>{const t=masterTime();pause();setTime(t+1/30)};$('reset').onclick=()=>{pause();setTime(visibleStart(data))};
   $('seek').oninput=e=>{pause();setTime(Number(e.target.value))};$('rate').onchange=()=>Object.values(videos).forEach(v=>v.playbackRate=Number($('rate').value));
@@ -220,6 +224,11 @@
     const gap=c.paired_gap,total=a.calibration_seconds==null||a.detector_benchmark_seconds==null?null:a.calibration_seconds+a.detector_benchmark_seconds+a.total_stage_seconds;const values=[c.id,visibleDuration(c).toFixed(1)+' 秒',seconds(total),seconds(a.total_stage_seconds),`${seconds(a.detector_benchmark_seconds)} / ${seconds(a.network_seconds)}`,`${seconds(a.physics_seconds)} · ${phys}`,seconds(a.calibration_seconds),gap.frames?`${gap.mean_m.toFixed(2)} 米 / ${gap.frames} 帧`:'暂无配对',c.split_note?'已整理 · 分界待确认':'已整理'];
     values.forEach((value,i)=>{const td=document.createElement('td');if(i===0){const b=document.createElement('button');b.className='case-link';b.textContent=value;b.onclick=()=>{choose(c.id);window.scrollTo({top:0,behavior:'smooth'})};td.appendChild(b)}else td.textContent=value;tr.appendChild(td)});$('caseRows').appendChild(tr);
   }
+  function met(v){return v==null?'—':v.toFixed(2)}
+  for(const c of cases){const m=c.real_metrics,tr=document.createElement('tr');
+    const vals=[c.id+(c.reference_protocol.startsWith('A观测')?' †':''),`${m.frames} / ${m.total_frames}`,`${(m.coverage*100).toFixed(1)}%`,met(m.network_mean_m),met(m.mean_m),met(m.median_m),met(m.p95_m),met(m.rms_m)];
+    vals.forEach((value,i)=>{const td=document.createElement('td');if(i===0){const b=document.createElement('button');b.className='case-link';b.textContent=value;b.onclick=()=>{choose(c.id);window.scrollTo({top:0,behavior:'smooth'})};td.appendChild(b)}else td.textContent=value;tr.appendChild(td)});$('realResultsRows').appendChild(tr);
+  }
   // Draw a circle for the actual presented frame rather than the playback
   // clock, which can lead or lag a frame when decoding is under load.
   function presented(k,mediaTime,now){if(!data||!Number.isFinite(mediaTime))return;displayed[k]=mediaTime;
@@ -236,7 +245,7 @@
     function fallback(now){for(const k of 'ABC')if(!frameCallback[k]&&!videos[k].paused&&shouldRun(k)&&videos[k].readyState>=2)presented(k,videos[k].currentTime,now);requestAnimationFrame(fallback)}
     requestAnimationFrame(fallback);
   }
-  function syncTick(){if(!data||videos[masterKey()].paused)return;const t=masterTime();
+  function syncTick(){if(!data||loading||resyncing||videos[masterKey()].paused)return;const t=masterTime();
     if(t>=data.duration_s-.005){pause();setTime(data.duration_s);return}
     if(expanded)return;
     const now=performance.now();for(const k of 'BC'){const v=videos[k];if(!shouldRun(k)||v.paused||v.seeking||v.readyState<2||now-lastCorrection[k]<700)continue;
@@ -244,6 +253,6 @@
       if(Math.abs(v.currentTime-target)>.06){lastCorrection[k]=now;seekVideo(k,t)}
     }
   }
-  for(const k of 'ABC')videos[k].addEventListener('ended',()=>{if(k===masterKey())pause()});
+  for(const k of 'ABC')videos[k].addEventListener('ended',()=>{if(data&&!loading&&!resyncing&&k===masterKey()&&videos[k].ended&&masterTime()>=data.duration_s-.04){pause();setTime(data.duration_s)}});
   choose(cases[0].id);setInterval(syncTick,250);
 })();

@@ -1,0 +1,141 @@
+{
+  "protocol": "Only B/C images and the B/C trajectory were used. Excluded samples are missing, not interpolated. No A prediction was used.",
+  "count": 9,
+  "edits": [
+    {
+      "case": "case04_A7_1",
+      "ref_index": 5,
+      "time_B_s": 0.05134740429150497,
+      "original_xyz_m": [
+        -0.7520699495278091,
+        2.2875858733292755,
+        1.9649815033288047
+      ],
+      "B_frame": 52,
+      "C_frame": 60,
+      "decision": "exclude",
+      "reason": "B/C picture and neighboring B/C trajectory show isolated mismatch",
+      "review_image_sha256": "2949e41b3fdaa7b880978b89c2813bf8fd630458df35aaf0753f89c6387a4c13"
+    },
+    {
+      "case": "case05_A8",
+      "ref_index": 574,
+      "time_B_s": 5.9250723537544445,
+      "original_xyz_m": [
+        -2.869433962906943,
+        -2.903009406807825,
+        2.6826660731799077
+      ],
+      "B_frame": 296,
+      "C_frame": 354,
+      "decision": "exclude",
+      "reason": "B/C picture and neighboring B/C trajectory show isolated mismatch",
+      "review_image_sha256": "38c8525dc6e4b72a371dd94ad2337924f9dbc58caea429fb4f188b58ea5de8e2"
+    },
+    {
+      "case": "case13_A7",
+      "ref_index": 258,
+      "time_B_s": 2.725911008838136,
+      "original_xyz_m": [
+        -0.5192591412522393,
+        1.9976486481251305,
+        1.2159732688844063
+      ],
+      "B_frame": 301,
+      "C_frame": 359,
+      "decision": "exclude",
+      "reason": "B/C picture and neighboring B/C trajectory show isolated mismatch",
+      "review_image_sha256": "da08ef7f110c2d471bdc51b1f786cabe21398793c45e5a079bed7cd171e05819"
+    },
+    {
+      "case": "case13_A7",
+      "ref_index": 488,
+      "time_B_s": 5.128148652149161,
+      "original_xyz_m": [
+        -3.2522477933139036,
+        -2.160594651803661,
+        2.086997587360855
+      ],
+      "B_frame": 421,
+      "C_frame": 503,
+      "decision": "exclude",
+      "reason": "B/C picture and neighboring B/C trajectory show isolated mismatch",
+      "review_image_sha256": "e29011627e8fa7fd7b820a70a7b2124ad687f70851f4f8fd1b40525f0c61fcb4"
+    },
+    {
+      "case": "case13_A7",
+      "ref_index": 509,
+      "time_B_s": 5.32599870900982,
+      "original_xyz_m": [
+        -1.9759279325841974,
+        1.4283328142249496,
+        1.3498171826520438
+      ],
+      "B_frame": 431,
+      "C_frame": 515,
+      "decision": "exclude",
+      "reason": "B/C picture and neighboring B/C trajectory show isolated mismatch",
+      "review_image_sha256": "22e39efe6506fd00a9a8fc9688c1b44be295184415b50372e45463b24166af77"
+    },
+    {
+      "case": "case16_A7",
+      "ref_index": 41,
+      "time_B_s": 0.5056800077987305,
+      "original_xyz_m": [
+        -1.0300771951040244,
+        0.12701026168628038,
+        3.5486214561653218
+      ],
+      "B_frame": 425,
+      "C_frame": 507,
+      "decision": "exclude",
+      "reason": "B/C picture and neighboring B/C trajectory show isolated mismatch",
+      "review_image_sha256": "612d52d30ea1b7e3d2069fa82725814dc52c08533183258be21abc166a66c619"
+    },
+    {
+      "case": "case17_A8_1",
+      "ref_index": 90,
+      "time_B_s": 1.1547461806012507,
+      "original_xyz_m": [
+        -1.3656809969058115,
+        0.7303508419457869,
+        3.262441112815701
+      ],
+      "B_frame": 57,
+      "C_frame": 67,
+      "decision": "exclude",
+      "reason": "B/C picture and neighboring B/C trajectory show isolated mismatch",
+      "review_image_sha256": "c470b9562e7b359a19f19bc2b8820cea1be030776dbe92b891233b5da9b2a723"
+    },
+    {
+      "case": "case17_A8_2",
+      "ref_index": 445,
+      "time_B_s": 0.8101316448697253,
+      "original_xyz_m": [
+        -0.8448094152628877,
+        2.538818969178702,
+        1.5528564235365554
+      ],
+      "B_frame": 237,
+      "C_frame": 283,
+      "decision": "exclude",
+      "reason": "B/C picture and neighboring B/C trajectory show isolated mismatch",
+      "review_image_sha256": "88d2bc254fe322e06b8809bc4de7f6eb3628b7bd53117ce261aead476f9c228f"
+    },
+    {
+      "case": "case18_A8_2",
+      "ref_index": 983,
+      "time_B_s": 3.8360109457675255,
+      "original_xyz_m": [
+        -0.2962834166636815,
+        -2.7713295081104032,
+        3.3006571485991025
+      ],
+      "B_frame": 528,
+      "C_frame": 632,
+      "decision": "exclude",
+      "reason": "B/C picture and neighboring B/C trajectory show isolated mismatch",
+      "review_image_sha256": "8dc10fa2000948284914f65f5072cdd41972134b4475999dc303ff5ad298830e"
+    }
+  ]
+}
